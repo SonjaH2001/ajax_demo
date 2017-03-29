@@ -9,6 +9,18 @@ var index = require('./routes/index');
 
 var app = express();
 
+// todo: No auth or PW on mongo yet, needed for this project?
+//     I added this code, is it needed/
+// where does the end brace go?
+
+// var mongo_pw = process.env.MONGO_PW;
+// var url = 'mongodb://admin:' + mongo_pw +
+//     '@localhost:27017/travelList?authSource=admin';
+//     MongoClient.connect(url, function(err, db) {
+//     assert.equal(null, err);
+//     console.log('connected to MongoDB');
+//      }
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
