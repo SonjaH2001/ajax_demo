@@ -24,6 +24,14 @@ router.get('/all', function(req, res) {
   res.json(places);
 });
 
+    req.db.collection('travelList').find().toArray(function (err,docs){
+        if (err) {
+            return next(err);
+        }
+        return res.render('locations', {'name':docs, 'visited':visitDocs, 'priority': ratingDocs});
+    });
+
+
 
 /* POST - add a new location */
 router.post('/add', function(req, res) {
