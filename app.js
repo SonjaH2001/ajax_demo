@@ -13,13 +13,12 @@ var app = express();
 //     I added this code, is it needed/
 // where does the end brace go?
 
-// var mongo_pw = process.env.MONGO_PW;
-// var url = 'mongodb://admin:' + mongo_pw +
-//     '@localhost:27017/travelList?authSource=admin';
-//     MongoClient.connect(url, function(err, db) {
-//     assert.equal(null, err);
-//     console.log('connected to MongoDB');
-//      }
+var mongo_pw = process.env.MONGO_PW;
+var url = 'mongodb://@localhost:27017/travelList';
+    MongoClient.connect(url, function(err, db) {
+    assert.equal(null, err);
+    console.log('connected to MongoDB');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', function(req, res, next){
+    req.db = db;
+    next();
+});
 
 app.use('/', index);
 
@@ -52,5 +56,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+});
+//database callback end here
 module.exports = app;
