@@ -8,8 +8,7 @@ var assert = require('assert');
 //I added this definition.
 var MongoClient = require('mongodb').MongoClient;
 //I added these.
-var index = require('./routes/index');
-var users = require('./routes/uesers');
+var routes = require('./routes/index');
 
 var app = express();
 
@@ -38,10 +37,10 @@ app.use('/', function(req, res, next){
     next();
 });
 
-app.use('/', index);
+// app.use('/', index);
 //i added these
 app.use('/', routes);
-app.use('/users', users);
+// app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

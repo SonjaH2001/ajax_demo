@@ -14,22 +14,22 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Travel Wish List', places : places });
+  res.render('index', { title: 'Travel Wish List' });
 });
 
 // todo: look at flowers, err, if statement
 // '(places was the hard coded list)'
 /* GET all items home page. */
 router.get('/all', function(req, res) {
-  res.json(places);
+  // res.json(places);TODO need to make this see the database.
 });
 
-    req.db.collection('travelList').find().toArray(function (err,docs){
-        if (err) {
-            return next(err);
-        }
-        return res.render('locations', {'name':docs, 'visited':visitDocs, 'priority': ratingDocs});
-    });
+    // req.db.collection('travelList').find().toArray(function (err,docs){
+    //     if (err) {
+    //         return next(err);
+    //     }
+    //     return res.json('locations', {'name':docs, 'visited':visitDocs, 'priority': ratingDocs});
+    // });
 
 
 
