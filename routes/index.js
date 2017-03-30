@@ -22,27 +22,29 @@ router.get('/', function(req, res) {
 /* GET all items home page. */
 router.get('/all', function(req, res) {
   // res.json(places);TODO need to make this see the database.
+
+
+    req.db.collection('travelList').find().toArray(function (err,docs){
+        if (err) {
+            return next(err);
+        }
+        return res.json({'name':docs, 'visited':docs, 'priority':docs});
+    });
+
 });
-
-    // req.db.collection('travelList').find().toArray(function (err,docs){
-    //     if (err) {
-    //         return next(err);
-    //     }
-    //     return res.json('locations', {'name':docs, 'visited':visitDocs, 'priority': ratingDocs});
-    // });
-
-
-
+// TODO-'places' change to db.
 /* POST - add a new location */
 router.post('/add', function(req, res) {
 
   var name = req.body.name;
-  var place = { 'id': ++counter + "" , 'name': name, 'visited': false };
+  // var place = { 'id': ++counter + "" , 'name': name, 'visited': false };
 
-  places.push(place);
+  var place = { 'name':"" , 'priority': name, 'visited': false };
+
+  locations.push(place);
 
   console.log('After POST, the places list is');
-  console.log(places);
+  console.log(locations);
 
   res.status(201);      // Created
   res.json(place);      // Send new object data back as JSON, if needed.
