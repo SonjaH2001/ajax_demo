@@ -89,6 +89,7 @@ function getAllPlaces(){
     url:"/all"
   }).done(function(data){
     //Build HTML for each place in list
+    console.log(data);
     addPlacesToPage(data);
     addNewPlaceFormListener();  //Once page is loaded, enable form
 
@@ -164,4 +165,3 @@ function deletePlace(id) {
     console.log(error);
   });
 }
-
