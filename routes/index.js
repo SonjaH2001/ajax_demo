@@ -23,12 +23,13 @@ router.get('/', function(req, res) {
 router.get('/all', function(req, res) {
   // res.json(places);TODO need to make this see the database.
 
-
-    req.db.collection('travelList').find().toArray(function (err,docs){
+    req.db.find().toArray(function (err,docs){
         if (err) {
             return next(err);
         }
-        return res.json({'name':docs, 'visited':docs, 'priority':docs});
+        //return res.json({'name':docs, 'visited':docs, 'priority':docs});
+        console.log(docs)
+        return res.json(docs);
     });
 
 });
@@ -36,20 +37,34 @@ router.get('/all', function(req, res) {
 /* POST - add a new location */
 router.post('/add', function(req, res) {
 
-  var name = req.body.name;
+  console.log("add new place ")
+  var place = { name : req.body.name , visited: false }
   // var place = { 'id': ++counter + "" , 'name': name, 'visited': false };
 
-  var place = { 'name':"" , 'priority': name, 'visited': false };
+  req.db.insertOne( place , function(err){
 
-  locations.push(place);
+    console.log(err)
+    console.log('The place is ')
 
-  console.log('After POST, the places list is');
-  console.log(locations);
+      if (err) {
+        console.log(err)
+        return next(err);
+      }
+      res.status(201);
+      return res.json(place);
+  })
 
-  res.status(201);      // Created
-  res.json(place);      // Send new object data back as JSON, if needed.
-
-  // TODO may want to check if place already in list and don't add.
+  // var place = { 'name':"" , 'priority': name, 'visited': false };
+  //
+  // locations.push(place);
+  //
+  // console.log('After POST, the places list is');
+  // console.log(locations);
+  //
+  // res.status(201);      // Created
+  // res.json(place);      // Send new object data back as JSON, if needed.
+  //
+  // // TODO may want to check if place already in list and don't add.
 
 });
 
