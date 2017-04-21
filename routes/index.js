@@ -38,15 +38,26 @@ router.post('/add', function(req, res) {
 
   var name = req.body.name;
   // var place = { 'id': ++counter + "" , 'name': name, 'visited': false };
+//make a new json object
+  var place = { 'name': name, 'visited': false };
 
-  var place = { 'name':"" , 'priority': name, 'visited': false };
+  req.db.collection('travelList').insertOne(place, function (err) {
+      if (err) {
+        return next(err);
+      }
+      return
+      //res.json
+  })
 
-  locations.push(place);
+  // locations.push(place);
+
+
 
   console.log('After POST, the places list is');
   console.log(locations);
 
   res.status(201);      // Created
+//do a console.log here and learn!!!
   res.json(place);      // Send new object data back as JSON, if needed.
 
   // TODO may want to check if place already in list and don't add.
