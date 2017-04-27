@@ -45,8 +45,9 @@ router.post('/add', function(req, res) {
       if (err) {
         return next(err);
       }
-      return
-      //res.json
+      res.status(201);      // Created
+//do a console.log here and learn!!!
+      res.json(place);      // Send new object data back as JSON, if needed.
   })
 
   // locations.push(place);
@@ -56,9 +57,10 @@ router.post('/add', function(req, res) {
   console.log('After POST, the places list is');
   console.log(locations);
 
-  res.status(201);      // Created
-//do a console.log here and learn!!!
-  res.json(place);      // Send new object data back as JSON, if needed.
+  // moved it up to insertone block
+//   res.status(201);      // Created
+// //do a console.log here and learn!!!
+//   res.json(place);      // Send new object data back as JSON, if needed.
 
   // TODO may want to check if place already in list and don't add.
 
